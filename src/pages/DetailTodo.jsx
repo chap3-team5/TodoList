@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import { __getTodo, __updateTodo } from '../redux/modules/detailTodoSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import Comments from '../components/Comments';
+import AddComments from '../components/AddComment';
 
 const DetailTodo = () => {
   const dispatch = useDispatch();
@@ -55,6 +56,8 @@ const DetailTodo = () => {
         <CommonButton onClick={() => setIsEdit(!isEdit)}>{'수정'}</CommonButton>
       )}
       {!isEdit && <Comments />}
+
+      <AddComments />
     </div>
   );
 };
