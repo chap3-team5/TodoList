@@ -1,11 +1,14 @@
-import React from "react";
-import styled from "styled-components";
-import { HiHome } from "react-icons/hi";
+import React from 'react';
+import styled from 'styled-components';
+import { HiHome } from 'react-icons/hi';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  const navigate = useNavigate();
+
   return (
     <StContainer>
-      <HiHome size="24" />
+      <HiHome onClick={() => navigate('/')} size="24" />
       <StTitle>My Todo List</StTitle>
     </StContainer>
   );
