@@ -13,7 +13,7 @@ export const __getTodo = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       // console.log(payload);
-      const todo = await axios.get(`http://localhost:3002/todos?id=${payload}`);
+      const todo = await axios.get(`http://localhost:3001/todos?id=${payload}`);
       console.log([...todo.data]);
       return thunkAPI.fulfillWithValue(...todo.data);
     } catch (e) {
@@ -29,7 +29,7 @@ export const __updateTodo = createAsyncThunk(
     console.log(payload);
     try {
       const todo = await axios.patch(
-        `http://localhost:3002/todos/${payload.id}`,
+        `http://localhost:3001/todos/${payload.id}`,
         payload
       );
       console.log(todo, 'todo.data', todo.data);
