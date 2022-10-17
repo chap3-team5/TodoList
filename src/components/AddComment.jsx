@@ -1,19 +1,24 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { __addComment } from '../redux/modules/addCommentSlice';
 
 const AddComments = () => {
+  const dispatch = useDispatch();
   const [comment, setComment] = useState({
-    title: '',
+    ninckname: '',
     body: '',
   });
 
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
-    setComment({ ...todo, [name]: value });
+    setComment({ ...comment, [name]: value });
   };
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    if (comment.title.trim() === '' || comment.body.trim() === '') return;
+    if (comment.ninckname.trim() === '' || comment.body.trim() === '') return;
+    dispatch(__addComment(comment));
+    setComment({ ninckname: '', body: '' });
   };
 
   return (
@@ -21,8 +26,8 @@ const AddComments = () => {
       <form onSubmit={onSubmitHandler}>
         <input
           type="text"
-          name="title"
-          value={comment.title}
+          name="ninckname"
+          value={comment.ninckname}
           onChange={onChangeHandler}
           placeholder="이름 (5자 이내)"
         ></input>
