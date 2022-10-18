@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { __addComment } from '../redux/modules/addCommentSlice';
 
 const AddComments = () => {
   const dispatch = useDispatch();
+  const { id } = useParams();
   const [comment, setComment] = useState({
     ninckname: '',
     body: '',
@@ -17,7 +19,7 @@ const AddComments = () => {
   const onSubmitHandler = (event) => {
     event.preventDefault();
     if (comment.ninckname.trim() === '' || comment.body.trim() === '') return;
-    dispatch(__addComment(comment));
+    dispatch(__addComment({ todoId: id, ...comment }));
     setComment({ ninckname: '', body: '' });
   };
 
