@@ -6,6 +6,7 @@ const initialState = {
   error: null,
   comments: [
     {
+      todoId: 0,
       id: 0,
       username: 'kang',
       body: 'its body',
