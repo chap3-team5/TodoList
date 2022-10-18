@@ -1,9 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom'; //충돌부분
 import styled from 'styled-components';
+import { __getTodoId } from '../redux/modules/commentsSlice';
 import AddComments from './AddComment';
+import Comment from './Comment';
+//충돌부분
 
 const Comments = () => {
+  // 충돌부분--------------------------------
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const { data } = useSelector((state) => state.comments.commentsTodoId);
+  console.log(data);
+
+  //여기까지충돌부분 ------------------------------------
   const [isShow, setIsShow] = useState(false);
+
+  useEffect(() => {
+    if (isShow) {
+      dispatch(__getTodoId(id));
+    }
+  }, [dispatch, id, isShow]);
 
   return (
     <StContainer isShow={isShow}>
@@ -15,6 +33,13 @@ const Comments = () => {
         <StText>{isShow ? '🔍 댓글내리기' : '🔍 댓글보기'}</StText>
       </StToggleContainer>
       <AddComments />
+      {/* 충돌부분 */}
+      <div>
+        {data.map((comment) => (
+          <Comment key={comment.id} comment={comment} />
+        ))}
+      </div>
+      {/* 충돌부분 */}
     </StContainer>
   );
 };
@@ -40,3 +65,7 @@ const StText = styled.div`
   margin: 20px 0 20px 0;
   font-size: 14px;
 `;
+
+// const CommentList = styled.div`
+//   height: 350px;
+// `;

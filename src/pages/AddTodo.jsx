@@ -45,6 +45,7 @@ const AddTodo = () => {
     }
     dispatch(__addBtn(todo));
     setTodo({ username: '', title: '', body: '' });
+    navigate('/TodoList');
   };
 
   return (

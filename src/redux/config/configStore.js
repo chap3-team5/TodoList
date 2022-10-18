@@ -3,6 +3,7 @@ import todos from '../modules/todolistSlice';
 import detailTodo from '../modules/detailTodoSlice';
 import addTodos from '../modules/addtodoSlice';
 import addComment from '../modules/addCommentSlice';
+import comments from '../modules/commentsSlice';
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     todos: todos,
     addTodos: addTodos,
     addComment: addComment,
+    comments: comments,
   },
 });
 
