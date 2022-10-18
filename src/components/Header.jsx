@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <StContainer>
       <HiHome onClick={() => navigate('/')} size="24" />
-      <StTitle>My Todo List</StTitle>
+      <div className="font-serif text-xl ml-2">My Todo List</div>
     </StContainer>
   );
 };
@@ -22,7 +22,7 @@ const StContainer = styled.div`
   align-items: center;
 `;
 
-const StTitle = styled.div`
+/*const StTitle = styled.div`
   font-size: 24px;
   padding-left: 10px;
-`;
+`;*/
