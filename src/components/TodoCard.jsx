@@ -13,13 +13,14 @@ const TodoCard = ({ todo }) => {
   };
 
   return (
-    <StTodocard
+    <div
+      className="border border-solid  border-slate-200 w-full h-20 mb-3 mt-2 rounded-lg "
       onClick={() => {
         navigate(`/DetailTodo/${todo.id}`);
         console.log(todo.id);
       }}
     >
-      <StContent>
+      <div>
         <div>{todo.title}</div>
         <button
           onClick={(e) => {
@@ -32,15 +33,16 @@ const TodoCard = ({ todo }) => {
         >
           삭제
         </button>
-      </StContent>
+      </div>
+
       <div>작성자: {todo.username}</div>
-    </StTodocard>
+    </div>
   );
 };
 
 export default TodoCard;
 
-const StTodocard = styled.div`
+/*const StTodocard = styled.div`
   border: 1px solid #ddd;
   border-radius: 10px;
   width: 100%;
@@ -51,4 +53,4 @@ const StTodocard = styled.div`
 const StContent = styled.div`
   display: flex;
   justify-content: space-between;
-`;
+`;*/
