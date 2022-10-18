@@ -13,8 +13,8 @@ const Comments = () => {
         }}
       >
         <StText>{isShow ? '🔍 댓글내리기' : '🔍 댓글보기'}</StText>
-        <AddComments />
       </StToggleContainer>
+      <AddComments />
     </StContainer>
   );
 };
