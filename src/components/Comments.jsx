@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import AddComments from './AddComment';
 
 const Comments = () => {
   const [isShow, setIsShow] = useState(false);
@@ -12,6 +13,7 @@ const Comments = () => {
         }}
       >
         <StText>{isShow ? '🔍 댓글내리기' : '🔍 댓글보기'}</StText>
+        <AddComments />
       </StToggleContainer>
     </StContainer>
   );
@@ -35,6 +37,6 @@ const StToggleContainer = styled.div`
 `;
 
 const StText = styled.div`
-  margin-top: 20px;
+  margin: 20px 0 20px 0;
   font-size: 14px;
 `;

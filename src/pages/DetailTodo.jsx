@@ -56,8 +56,6 @@ const DetailTodo = () => {
         <CommonButton onClick={() => setIsEdit(!isEdit)}>{'수정'}</CommonButton>
       )}
       {!isEdit && <Comments />}
-
-      <AddComments />
     </div>
   );
 };
