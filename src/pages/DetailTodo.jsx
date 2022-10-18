@@ -5,7 +5,6 @@ import { Link, useParams } from 'react-router-dom';
 import { __getTodo, __updateTodo } from '../redux/modules/detailTodoSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import Comments from '../components/Comments';
-import AddComments from '../components/AddComment';
 
 const DetailTodo = () => {
   const dispatch = useDispatch();
@@ -15,7 +14,6 @@ const DetailTodo = () => {
 
   //투두 한 개 갖고오기
   const todo = useSelector((state) => state.detailTodo.todo);
-  console.log(todo);
   useEffect(() => {
     dispatch(__getTodo(id));
   }, [dispatch, id]);
@@ -32,32 +30,64 @@ const DetailTodo = () => {
   };
 
   return (
-    <div>
+    <div className="min-w-screen-md h-screen">
       <Header />
-      <div>
-        <div>id:{todo.id}</div>
-        <div>
-          <Link to="/">이전으로</Link>{' '}
+      <div className="mt-7">
+        {isEdit ? (
+          <></>
+        ) : (
+          <div className="flex justify-between mx-auto bg-gray-200 rounded-xl shadow border p-3 ">
+            <div className=" text-center font-bold "> 아이디 : {todo.id}</div>
+            <div className="text-emerald-500 text-center hover:text-emerald-800 transition-all duration-300 ease-out">
+              <Link to="/TodoList">뒤로가기</Link>{' '}
+            </div>
+          </div>
+        )}
+
+        <div className=" mx-auto mt-3 bg-gray-200 rounded-xl shadow border p-3 ">
+          제목 : {todo.title}
         </div>
+        {isEdit ? (
+          <textarea
+            value={todoContent}
+            name="todoContent"
+            onChange={(e) => setTodoContent(e.target.value)}
+            className=" h-96 w-screen mt-3 bg-blue-50 rounded-xl shadow border p-3  "
+          ></textarea>
+        ) : (
+          <div className=" h-96 mx-auto mt-3 bg-gray-200 rounded-xl shadow border p-3 ">
+            {todo.body}
+          </div>
+        )}
       </div>
-      <div>{todo.title}</div>
-      {isEdit ? (
-        <textarea
-          value={todoContent}
-          name="todoContent"
-          onChange={(e) => setTodoContent(e.target.value)}
-        ></textarea>
-      ) : (
-        <div>{todo.body}</div>
-      )}
-      {isEdit ? (
-        <CommonButton onClick={onClickEditHandler}>{'저장'}</CommonButton>
-      ) : (
-        <CommonButton onClick={() => setIsEdit(!isEdit)}>{'수정'}</CommonButton>
-      )}
+      <div className="flex justify-center mt-3 bottom-0 w-full">
+        {isEdit ? (
+          <button
+            onClick={onClickEditHandler}
+            className=" bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded"
+          >
+            {'저장'}
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              setIsEdit(!isEdit);
+            }}
+            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+          >
+            {'수정'}
+          </button>
+        )}
+      </div>
       {!isEdit && <Comments />}
     </div>
   );
 };
 
 export default DetailTodo;
+
+// borderColor="red"
+//           borderRadius="8px"
+//           onClick={() => console.log(3)}
+//           width="100%"
+//           height="46px"
