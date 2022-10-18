@@ -7,7 +7,7 @@ import { __deleteTodosThunk } from '../redux/modules/todolistSlice';
 const TodoCard = ({ todo }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  console.log(todo);
   const DeleteHandler = () => {
     dispatch(__deleteTodosThunk(todo.id));
   };
@@ -16,6 +16,7 @@ const TodoCard = ({ todo }) => {
     <StTodocard
       onClick={() => {
         navigate(`/DetailTodo/${todo.id}`);
+        console.log(todo.id);
       }}
     >
       <StContent>
