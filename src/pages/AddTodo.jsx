@@ -1,13 +1,26 @@
 import React from 'react';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { __addBtn } from '../redux/modules/addtodoSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { completeTodo, __addBtn } from '../redux/modules/addtodoSlice';
 import Header from '../components/Header';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const AddTodo = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isSuccess = useSelector((state) => state.todos.isSuccess);
 
   // // const { isLoading, error, todos } = useSelector((state) => state);
+  useEffect(() => {
+    if (!isSuccess) {
+      return;
+    }
+    if (isSuccess) {
+      return navigate('/TodoList');
+    }
+    return () => dispatch(completeTodo());
+  }, [dispatch, isSuccess, navigate]);
 
   const [todo, setTodo] = useState({
     username: '',
