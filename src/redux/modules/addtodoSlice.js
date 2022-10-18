@@ -6,6 +6,7 @@ import axios from 'axios';
 const initialState = {
   todos: [],
   isLoading: false,
+  isSuccess: false,
   error: null,
 };
 //Thunk 함수
@@ -24,16 +25,22 @@ export const __addBtn = createAsyncThunk(
     }
   }
 );
+
 //reducer
 const addtodoSlice = createSlice({
-  name: 'addTodos ',
+  name: 'addTodos',
   initialState,
   reducers: {
     addBtn: (state, action) => {
       return { todo: [...state.todos, action.payload] };
     },
+    completeTodo: (state, action) => {
+      state.isSuccess = false;
+    },
+
     // dfsd
   },
+
   extraReducers: {
     //pending - 대기
     [__addBtn.pending]: (state) => {
@@ -60,5 +67,5 @@ const addtodoSlice = createSlice({
   },
 });
 
-export const { addBtn } = addtodoSlice.actions;
+export const { addBtn, completeTodo } = addtodoSlice.actions;
 export default addtodoSlice.reducer;
