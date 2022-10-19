@@ -74,7 +74,7 @@ const AddTodo = () => {
             onChange={onChangeValue}
           />
 
-          <CommonButton css="border mt-40 text-center h-7 cursor-pointer  hover:bg-slate-200 rounded-md w-full">
+          <CommonButton className="border mt-40 text-center h-7 cursor-pointer  hover:bg-slate-200 rounded-md w-full">
             추가하기
           </CommonButton>
         </div>

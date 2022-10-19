@@ -5,8 +5,6 @@ import { __getTodoId } from '../redux/modules/commentsSlice';
 import AddComments from './AddComment';
 import Comment from './Comment';
 
-//충돌부분
-
 const Comments = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -39,23 +37,3 @@ const Comments = () => {
 };
 
 export default Comments;
-
-// const StContainer = styled.div`
-//   height: ${({ isShow }) => (isShow ? '400px' : '50px')};
-//   position: absolute;
-//   bottom: 0px;
-//   width: 100%;
-//   background-color: #fff;
-//   transition: height 400ms ease-in-out;
-// `;
-
-// const StToggleContainer = styled.div`
-//   height: 50px;
-//   padding: 0 12px;
-//   border-top: 1px solid #eee;
-// `;
-
-// const StText = styled.div`
-//   margin: 20px 0 20px 0;
-//   font-size: 14px;
-// `;

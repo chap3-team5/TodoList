@@ -22,8 +22,12 @@ const AddComments = () => {
 
   return (
     <div>
-      <form onSubmit={onSubmitHandler}>
+      <form
+        onSubmit={onSubmitHandler}
+        className="flex flex-row justify-between w-full  gap-2 "
+      >
         <input
+          className=" h-10 border rounded "
           type="text"
           name="nickname"
           value={comment.nickname}
@@ -32,6 +36,7 @@ const AddComments = () => {
           maxLength={5}
         ></input>
         <input
+          className=" h-10 flex-1 border rounded"
           type="text"
           name="body"
           value={comment.body}
@@ -39,7 +44,9 @@ const AddComments = () => {
           placeholder="댓글을 추가하세요. (100자 이내)"
           maxLength={100}
         ></input>
-        <CommonButton css="bg-red-500">추가하기</CommonButton>
+        <CommonButton className="float-right w-20 mt-0 bg-emerald-500 rounded text-white pt-2 pb-2">
+          추가하기
+        </CommonButton>
       </form>
     </div>
   );
