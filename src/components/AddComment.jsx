@@ -1,27 +1,32 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import useInput from '../hooks/useInput';
 import { __addComment } from '../redux/modules/commentsSlice';
 
 const AddComments = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-
-  const [comment, setComment] = useState({
+  const [comment, onChangeHandler, reset] = useInput({
     nickname: '',
     body: '',
   });
+  // const [comment, setComment] = useState({
+  //   nickname: '',
+  //   body: '',
+  // });
 
-  const onChangeHandler = (event) => {
-    const { name, value } = event.target;
-    setComment({ ...comment, [name]: value });
-  };
+  // const onChangeHandler = (event) => {
+  //   const { name, value } = event.target;
+  //   setComment({ ...comment, [name]: value });
+  // };
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
     if (comment.nickname.trim() === '' || comment.body.trim() === '') return;
     dispatch(__addComment({ todoId: +id, ...comment }));
-    setComment({ nickname: '', body: '' });
+    reset();
+    //setComment({ nickname: '', body: '' });
   };
 
   return (

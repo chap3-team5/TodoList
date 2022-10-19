@@ -11,7 +11,6 @@ const AddTodo = () => {
   const navigate = useNavigate();
   const isSuccess = useSelector((state) => state.todos.isSuccess);
 
-  // // const { isLoading, error, todos } = useSelector((state) => state);
   useEffect(() => {
     if (!isSuccess) {
       return;
@@ -29,13 +28,12 @@ const AddTodo = () => {
   });
 
   const onChangeValue = (e) => {
-    // console.log(e);
     const { name, value } = e.target;
-    console.log(name, value);
     setTodo({ ...todo, [name]: value });
   };
 
-  const onAddBtn = () => {
+  const onAddBtn = (e) => {
+    e.preventDefault();
     if (
       todo.username.trim() === '' ||
       todo.title.trim() === '' ||
@@ -61,7 +59,6 @@ const AddTodo = () => {
             maxLength="5"
             value={todo.username}
             onChange={onChangeValue}
-            required
           />
           <label className="mt-5">제목</label>
           <input
@@ -71,7 +68,6 @@ const AddTodo = () => {
             maxLength="50"
             value={todo.title}
             onChange={onChangeValue}
-            required
           />
           <label className="mt-5">내용</label>
           <textarea
@@ -81,10 +77,9 @@ const AddTodo = () => {
             maxLength="200"
             value={todo.body}
             onChange={onChangeValue}
-            required
           />
           <div className="border mt-40 text-center h-7 cursor-pointer  hover:bg-slate-200 rounded-md">
-            <button>추가하기</button>
+            <button className="w-full">추가하기</button>
           </div>
         </div>
       </form>
