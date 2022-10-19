@@ -4,7 +4,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const __getComment = createAsyncThunk(
-  '코멘트 한 개 가져오기',
+  'get a Comment',
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.get(
@@ -37,10 +37,9 @@ const commentSlice = createSlice({
   initialState,
   reducers: {
     emptyComment: (state) => {
-      console.log(state);
       state.data.content = '';
     },
-    editToggle: (state, action) => {
+    editingToggle: (state, action) => {
       state.editToggle = action.payload;
     },
   },
@@ -61,5 +60,5 @@ const commentSlice = createSlice({
 
 //export
 
-export const { emptyComment } = commentSlice.actions;
+export const { emptyComment, editingToggle } = commentSlice.actions;
 export default commentSlice.reducer;

@@ -18,7 +18,7 @@ const Comment = ({ comment }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [modifyComment, setModifyComment] = useState('');
   const dispatch = useDispatch();
-  const { editState } = useSelector((state) => state.comments);
+  const { editingToggle } = useSelector((state) => state.comments);
 
   //   const { content } = useSelector((state) => state.comment);
 
@@ -41,14 +41,14 @@ const Comment = ({ comment }) => {
       })
     );
     setIsEdit(false);
-    // dispatch(editToggle(false));
+    dispatch(editToggle(false));
   };
 
   //수정하기
   const onEditBtn = () => {
     setIsEdit(true);
-    dispatch(__getComment(comment.id));
-    // dispatch(editToggle(true));
+    // dispatch(__getComment(comment.id));
+    dispatch(editToggle(true));
   };
 
   //삭제하기
@@ -66,7 +66,7 @@ const Comment = ({ comment }) => {
   const onCancleBtn = () => {
     setIsEdit(false);
     dispatch(emptyComment());
-    // dispatch(editToggle(false));
+    dispatch(editToggle(false));
   };
   return (
     <div className="commentwrap">
@@ -79,10 +79,10 @@ const Comment = ({ comment }) => {
           </div>
 
           <div>
-            <button onClick={onEditBtn} disabled={editState}>
+            <button onClick={onEditBtn} disabled={editingToggle}>
               수정
             </button>
-            <button onClick={onDeleteBtn} disabled={editState}>
+            <button onClick={onDeleteBtn} disabled={editingToggle}>
               삭제
             </button>
           </div>

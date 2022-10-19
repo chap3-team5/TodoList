@@ -12,9 +12,7 @@ export const __getTodo = createAsyncThunk(
   'getTodo/투두한개가져오기',
   async (payload, thunkAPI) => {
     try {
-      // console.log(payload);
       const todo = await axios.get(`http://localhost:3001/todos?id=${payload}`);
-      console.log([...todo.data]);
       return thunkAPI.fulfillWithValue(...todo.data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
@@ -26,13 +24,11 @@ export const __getTodo = createAsyncThunk(
 export const __updateTodo = createAsyncThunk(
   'updateTodo/투두 수정하기',
   async (payload, thunkAPI) => {
-    console.log(payload);
     try {
       const todo = await axios.patch(
         `http://localhost:3001/todos/${payload.id}`,
         payload
       );
-      console.log(todo, 'todo.data', todo.data);
       return thunkAPI.fulfillWithValue(todo.data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
@@ -62,7 +58,6 @@ export const detailTodoSlice = createSlice({
       state.isLoading = true;
     },
     [__updateTodo.fulfilled]: (state, action) => {
-      console.log(action);
       state.isLoading = false;
       state.todo = action.payload;
     },
