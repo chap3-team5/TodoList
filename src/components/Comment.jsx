@@ -76,22 +76,35 @@ const Comment = ({ comment }) => {
     <div className="commentwrap">
       {/* 수정버튼 클릭 전 */}
       {!isEdit ? (
-        <div className="borderWrap">
-          <div className="inputcomment">
-            <div>{comment.nickname}</div>
-            <div>{comment.body}</div>
+        <div class="w-full flex flex-row m-2 rounded-md text-sm bg-gray-50 font-medium text-gray-500 ">
+          <div className="w-4/5 h-16 pt-5 text-center rounded">
+            <div className="float-left ml-2 mr-2 rounded-md border border-gray-300 text-xl">
+              {comment.nickname}
+            </div>
+            <div className=" text-xl text-left">{comment.body}</div>
           </div>
 
-          <div>
-            <button onClick={onEditBtn}>수정</button>
-            <button onClick={onDeleteBtn}>삭제</button>
+          <div className="absolute right-10 float-right flex gap-2 mr-5 justify-center rounded-md bg-white mt-2 p-1 py-1 text-base font-large text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+            <button
+              onClick={onEditBtn}
+              className="w-full justify-center rounded-md border border-gray-300 bg-white px-2 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-0 sm:w-auto sm:text-sm"
+            >
+              수정
+            </button>
+            <button
+              onClick={onDeleteBtn}
+              className="w-full justify-center rounded-md border border-transparent bg-red-600 px-2 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-200 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
+            >
+              삭제
+            </button>
           </div>
         </div>
       ) : (
         /* 수정버튼 클릭 후 */
-        <BorderWrap>
-          <div className="inputcomment">
+        <div class="w-full flex flex-row m-2 rounded-md text-sm bg-gray-50 font-medium text-gray-500 ">
+          <div className="w-3/5 h-16 pt-5 text-center rounded">
             <input
+              className="float-left ml-2 mr-2 rounded-md border border-gray-300 text-xl"
               type="text"
               name="modifyComment"
               value={modifyComment}
@@ -101,11 +114,21 @@ const Comment = ({ comment }) => {
             />
           </div>
 
-          <div>
-            <button onClick={onCancleBtn}>취소</button>
-            <button onClick={onSaveBtn}>저장</button>
+          <div className="absolute right-10 float-right flex gap-2 mr-5 justify-center rounded-md bg-white mt-2 p-1 py-1 text-base font-large text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+            <button
+              onClick={onCancleBtn}
+              className="w-full justify-center rounded-md border border-gray-300 bg-white px-2 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-0 sm:w-auto sm:text-sm"
+            >
+              취소
+            </button>
+            <button
+              onClick={onSaveBtn}
+              className="w-full justify-center rounded-md border border-transparent bg-red-600 px-2 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-200 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
+            >
+              저장
+            </button>
           </div>
-        </BorderWrap>
+        </div>
       )}
     </div>
   );
