@@ -85,9 +85,3 @@ const DetailTodo = () => {
 };
 
 export default DetailTodo;
-
-// borderColor="red"
-//           borderRadius="8px"
-//           onClick={() => console.log(3)}
-//           width="100%"
-//           height="46px"

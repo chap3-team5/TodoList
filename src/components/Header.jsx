@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import { HiHome } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,22 +6,10 @@ const Header = () => {
   const navigate = useNavigate();
 
   return (
-    <StContainer>
+    <div className="flex ml-2 mt-3 pb-3 border-b-2">
       <HiHome onClick={() => navigate('/')} size="24" />
       <div className="font-serif text-xl ml-2">My Todo List</div>
-    </StContainer>
+    </div>
   );
 };
 export default Header;
-
-const StContainer = styled.div`
-  border-bottom: 1px solid #ddd;
-  height: 50px;
-  display: flex;
-  align-items: center;
-`;
-
-/*const StTitle = styled.div`
-  font-size: 24px;
-  padding-left: 10px;
-`;*/
