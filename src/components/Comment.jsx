@@ -9,7 +9,8 @@ import {
   __modifyComment,
   __getTodoId,
 } from '../redux/modules/commentsSlice';
-import { __getComments, emptyComment } from '../redux/modules/commentSlice';
+
+import { __getComment, emptyComment } from '../redux/modules/commentSlice';
 
 const Comment = ({ comment }) => {
   // console.log(comment);
@@ -17,8 +18,9 @@ const Comment = ({ comment }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [modifyComment, setModifyComment] = useState('');
   const dispatch = useDispatch();
-  // const { editState } = useSelector((state) => state.comments.comments);
-  // console.log(editState);
+
+  const { editState } = useSelector((state) => state.comments);
+
   //   const { content } = useSelector((state) => state.comment);
 
   //   const [value, setValue] = useState('');
@@ -28,25 +30,27 @@ const Comment = ({ comment }) => {
   //   };
 
   useEffect(() => {
-    dispatch(__getComments(comment.id));
+    setModifyComment(comment.body);
   }, [comment]);
+
   //저장하기
   const onSaveBtn = () => {
     dispatch(
       __modifyComment({
-        id: comment.id,
-        comment: modifyComment,
-        nickname: comment.nickname,
-        todoId: id,
+        ...comment,
+        body: modifyComment,
       })
     );
-    // setIsEdit(false);
+    setIsEdit(false);
+    // dispatch(editToggle(false));
   };
 
   //수정하기
   const onEditBtn = () => {
     setIsEdit(true);
-    dispatch(__getComments(comment.id));
+
+    dispatch(__getComment(comment.id));
+
     // dispatch(editToggle(true));
   };
 
@@ -89,7 +93,7 @@ const Comment = ({ comment }) => {
           <div className="inputcomment">
             <input
               type="text"
-              name={modifyComment}
+              name="modifyComment"
               value={modifyComment}
               onChange={(e) => {
                 setModifyComment(e.target.value);

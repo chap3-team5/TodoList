@@ -22,11 +22,24 @@ export const __getTodoId = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.get(
-        `http://localhost:3001/comments?todoId=${payload}`
+        `http://localhost:3001/comments/?todoId=${payload}`
       );
       return thunkAPI.fulfillWithValue(data);
     } catch (err) {
       return thunkAPI.rejectWithValue(err.code);
+    }
+  }
+);
+
+export const __addComment = createAsyncThunk(
+  'addComment/코멘트추가하기',
+  async (payload, thunkAPI) => {
+    try {
+      const data = await axios.post(`http://localhost:3001/comments`, payload);
+
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err);
     }
   }
 );
@@ -36,7 +49,7 @@ export const __delComment = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.delete(
-        `http://localhost:3001/comments?todoId=${payload}`
+        `http://localhost:3001/comments/${payload}`
       );
       return thunkAPI.fulfillWithValue(data);
     } catch (err) {
@@ -50,12 +63,12 @@ export const __modifyComment = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.patch(
-        `http://localhost:3001/comments/${payload}`,
+        `http://localhost:3001/comments/${payload.id}`,
         payload
       );
       return thunkAPI.fulfillWithValue(data);
     } catch (err) {
-      return thunkAPI.rejectWithValue(err);
+      // return thunkAPI.rejectWithValue(err);
     }
   }
 );
@@ -73,11 +86,19 @@ const initialState = {
     error: null,
   },
 };
+
 //reducer
 export const commentsSlice = createSlice({
   name: 'comments',
   initialState,
-  reducer: {},
+  reducers: {
+    editToggle: (state, action) => {
+      state.editToggle = action.payload;
+    },
+    emptyComment: (state, _) => {
+      //state.commentsTodoId.data.content = '';
+    },
+  },
   extraReducers: {
     //댓글 전부 가져와서 조회할거야.
     [__getTodoId.pending]: (state) => {
@@ -100,7 +121,7 @@ export const commentsSlice = createSlice({
       const target = state.commentsTodoId.data.findIndex(
         (comment) => comment.id === action.payload
       );
-      state.commentsTodoId.data.splice(target, 1);
+      state.comments.data.splice(target, 1);
     },
     [__delComment.rejected]: (state, action) => {
       state.commentsTodoId.isLoading = false;
@@ -109,12 +130,32 @@ export const commentsSlice = createSlice({
     //modify comment
     [__modifyComment.pending]: (state) => {},
     [__modifyComment.fulfilled]: (state, action) => {
-      const target = state.commentsTodoId.data.findIndex(
-        (comment) => comment.id === action.payload.id
-      );
-      state.commentsTodoId.data.splice(target, 1, action.payload);
+      const newComments = state.comments.data.map((comment) => {
+        if (comment.id === action.payload.id) {
+          return action.payload;
+        } else {
+          return comment;
+        }
+      });
+
+      state.comments.data = newComments;
+      state.isLoading = false;
     },
     [__modifyComment.rejected]: () => {},
+
+    [__addComment.pending]: (state) => {
+      state.isLoading = true;
+    },
+
+    [__addComment.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.comments.data.push(action.payload);
+    },
+
+    [__addComment.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
 });
 //export reducer
