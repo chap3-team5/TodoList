@@ -19,7 +19,7 @@ const Comments = () => {
 
   useEffect(() => {
     dispatch(__getTodoId(id));
-  }, [dispatch, id, isShow]);
+  }, [dispatch, id]);
 
   return (
     <StContainer isShow={isShow}>
@@ -31,13 +31,11 @@ const Comments = () => {
         <StText>{isShow ? '🔍 댓글내리기' : '🔍 댓글보기'}</StText>
       </StToggleContainer>
       <AddComments />
-      {/* 충돌부분 */}
       <div>
-        {data.map((comment) => (
-          <Comment key={comment.id} comment={comment} />
-        ))}
+        {data.map((comment) => {
+          return <Comment key={comment.id} comment={comment} />;
+        })}
       </div>
-      {/* 충돌부분 */}
     </StContainer>
   );
 };
