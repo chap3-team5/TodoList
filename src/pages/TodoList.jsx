@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
 import Header from '../components/Header';
 import TodoCard from '../components/TodoCard';
 import { __getTodosThunk } from '../redux/modules/todolistSlice';
@@ -22,8 +21,8 @@ const TodoList = () => {
   return (
     <div>
       <Header />
-      <StTodoList>
-        <h2>내 할일</h2>
+      <div className="flex flex-col mt-6 ml-4 mr-4">
+        <h2>📌 내 할일</h2>
         {todos.length === 0 ? (
           <div>✏️ 할 일을 추가해주세요</div>
         ) : (
@@ -33,15 +32,9 @@ const TodoList = () => {
             ))}
           </div>
         )}
-      </StTodoList>
+      </div>
     </div>
   );
 };
 
 export default TodoList;
-
-const StTodoList = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 20px 0 0 15px;
-`;

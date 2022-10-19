@@ -52,9 +52,10 @@ const AddTodo = () => {
     <div>
       <Header />
       <form onSubmit={onAddBtn}>
-        <div>
+        <div className="flex flex-col mt-3 ml-3">
           <label>작성자</label>
           <input
+            className="border rounded-md h-10 "
             name="username"
             placeholder="작성자의 이름을 입력해주세요.(5자 이내)"
             maxLength="5"
@@ -62,8 +63,9 @@ const AddTodo = () => {
             onChange={onChangeValue}
             required
           />
-          <label>제목</label>
+          <label className="mt-5">제목</label>
           <input
+            className="border rounded-md h-10"
             name="title"
             placeholder="제목을 입력해주세요.(50자 이내)"
             maxLength="50"
@@ -71,8 +73,9 @@ const AddTodo = () => {
             onChange={onChangeValue}
             required
           />
-          <label>내용</label>
+          <label className="mt-5">내용</label>
           <textarea
+            className="border rounded-md h-44"
             name="body"
             placeholder="내용을 입력해주세요.(200자 이내)"
             maxLength="200"
@@ -80,7 +83,7 @@ const AddTodo = () => {
             onChange={onChangeValue}
             required
           />
-          <div className="btnBox">
+          <div className="border mt-40 text-center h-7 cursor-pointer  hover:bg-slate-200 rounded-md">
             <button>추가하기</button>
           </div>
         </div>

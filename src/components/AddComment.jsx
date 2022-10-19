@@ -6,8 +6,9 @@ import { __addComment } from '../redux/modules/addCommentSlice';
 const AddComments = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
+
   const [comment, setComment] = useState({
-    ninckname: '',
+    nickname: '',
     body: '',
   });
 
@@ -18,9 +19,9 @@ const AddComments = () => {
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    if (comment.ninckname.trim() === '' || comment.body.trim() === '') return;
+    if (comment.nickname.trim() === '' || comment.body.trim() === '') return;
     dispatch(__addComment({ todoId: id, ...comment }));
-    setComment({ ninckname: '', body: '' });
+    setComment({ nickname: '', body: '' });
   };
 
   return (
@@ -28,8 +29,8 @@ const AddComments = () => {
       <form onSubmit={onSubmitHandler}>
         <input
           type="text"
-          name="ninckname"
-          value={comment.ninckname}
+          name="nickname"
+          value={comment.nickname}
           onChange={onChangeHandler}
           placeholder="이름 (5자 이내)"
         ></input>
