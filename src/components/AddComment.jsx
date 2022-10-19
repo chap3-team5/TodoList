@@ -20,7 +20,7 @@ const AddComments = () => {
   const onSubmitHandler = (event) => {
     event.preventDefault();
     if (comment.nickname.trim() === '' || comment.body.trim() === '') return;
-    dispatch(__addComment({ todoId: id, ...comment }));
+    dispatch(__addComment({ todoId: +id, ...comment }));
     setComment({ nickname: '', body: '' });
   };
 

@@ -8,7 +8,7 @@ export const __getTodoId = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.get(
-        `http://localhost:3001/comments?todoId=${payload}`
+        `http://localhost:3001/comments/?todoId=${payload}`
       );
       return thunkAPI.fulfillWithValue(data);
     } catch (err) {
@@ -22,7 +22,7 @@ export const __delComment = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.delete(
-        `http://localhost:3001/comments?todoId=${payload}`
+        `http://localhost:3001/comments/${payload}`
       );
       return thunkAPI.fulfillWithValue(data);
     } catch (err) {
@@ -36,7 +36,7 @@ export const __modifyComment = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.patch(
-        `http://localhost:3001/comments/${payload}`,
+        `http://localhost:3001/comments/${payload.id}`,
         payload
       );
       return thunkAPI.fulfillWithValue(data);
@@ -72,12 +72,13 @@ const initialState = {
 export const commentsSlice = createSlice({
   name: 'comments',
   initialState,
-  reducer: {
+  reducers: {
     editToggle: (state, action) => {
       state.editToggle = action.payload;
     },
-    emptyComment: (state) => {
-      state.data.content = '';
+    emptyComment: (state, _) => {
+      console.log(state);
+      //state.commentsTodoId.data.content = '';
     },
   },
   extraReducers: {
@@ -111,10 +112,15 @@ export const commentsSlice = createSlice({
     //modify comment
     [__modifyComment.pending]: (state) => {},
     [__modifyComment.fulfilled]: (state, action) => {
-      const target = state.commentsTodoId.data.findIndex(
-        (comment) => comment.id === action.payload.id
-      );
-      state.commentsTodoId.data.splice(target, 1, action.payload);
+      const newComments = state.comments.data.map((comment) => {
+        if (comment.id === action.payload.id) {
+          return action.payload;
+        } else {
+          return comment;
+        }
+      });
+      state.isLoading = false;
+      state.comments = newComments;
     },
     [__modifyComment.rejected]: () => {},
   },

@@ -1,19 +1,19 @@
 //src/components/comment.jsx
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import {
-  emptyComment,
   editToggle,
   __delComment,
   __getTodoId,
   __modifyComment,
 } from '../redux/modules/commentsSlice';
+import { __getComment, emptyComment } from '../redux/modules/commentSlice';
 
 const Comment = ({ comment }) => {
-  //   console.log(comment);
+  // console.log(comment);
   const { id } = useParams();
   const [isEdit, setIsEdit] = useState(false);
   const [modifyComment, setModifyComment] = useState('');
@@ -26,25 +26,28 @@ const Comment = ({ comment }) => {
   //     const { value } = e.target;
   //     setValue(value);
   //   };
+
+  useEffect(() => {
+    setModifyComment(comment.body);
+  }, [comment]);
+
   //저장하기
   const onSaveBtn = () => {
     dispatch(
       __modifyComment({
-        id: comment.id,
-        content: modifyComment,
-        ninckname: comment.ninckname,
-        todoId: id,
+        ...comment,
+        body: modifyComment,
       })
     );
     setIsEdit(false);
-    dispatch(editToggle(false));
+    // dispatch(editToggle(false));
   };
 
   //수정하기
   const onEditBtn = () => {
     setIsEdit(true);
-    dispatch(__getTodoId(comment.id));
-    dispatch(editToggle(true));
+    dispatch(__getComment(comment.id));
+    // dispatch(editToggle(true));
   };
 
   //삭제하기
@@ -62,7 +65,7 @@ const Comment = ({ comment }) => {
   const onCancleBtn = () => {
     setIsEdit(false);
     dispatch(emptyComment());
-    dispatch(editToggle(false));
+    // dispatch(editToggle(false));
   };
   return (
     <div className="commentwrap">
@@ -70,7 +73,7 @@ const Comment = ({ comment }) => {
       {!isEdit ? (
         <div className="borderWrap">
           <div className="inputcomment">
-            <div>{comment.ninckname}</div>
+            <div>{comment.nickname}</div>
             <div>{comment.body}</div>
           </div>
 
@@ -89,7 +92,7 @@ const Comment = ({ comment }) => {
           <div className="inputcomment">
             <input
               type="text"
-              name="comment"
+              name="modifyComment"
               value={modifyComment}
               onChange={(e) => {
                 setModifyComment(e.target.value);
