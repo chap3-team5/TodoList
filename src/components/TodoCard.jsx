@@ -17,7 +17,6 @@ const TodoCard = ({ todo }) => {
       className="border border-solid  border-slate-200 w-full h-20 mb-3 mt-2 rounded-lg drop-shadow-md  hover:bg-slate-200 cursor-pointer"
       onClick={() => {
         navigate(`/DetailTodo/${todo.id}`);
-        console.log(todo.id);
       }}
     >
       <div className="flex justify-between ml-2 mt-3 font-medium text-lg">

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Header from '../components/Header';
-import CommonButton from '../components/CommonButton';
 import { Link, useParams } from 'react-router-dom';
 import { __getTodo, __updateTodo } from '../redux/modules/detailTodoSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,17 +11,19 @@ const DetailTodo = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [todoContent, setTodoContent] = useState('');
   const inputRef = useRef();
-  //투두 한 개 갖고오기
+
+  //한 개 갖고오기
   const todo = useSelector((state) => state.detailTodo.todo);
   useEffect(() => {
     dispatch(__getTodo(id));
   }, [dispatch, id]);
 
-  //투두 수정 눌렀을 때 textarea에 todo값 불러오기
+  //수정 눌렀을 때 textarea에 todo값 불러오기
   useEffect(() => {
     setTodoContent(todo.body);
   }, [todo]);
 
+  //수정 눌렀을 때 focus가 작성된 본문 내용 맨 뒤에 가게 적용
   useEffect(() => {
     if (inputRef.current) {
       const end = inputRef.current.value.length;

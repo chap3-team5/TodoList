@@ -11,7 +11,6 @@ const AddTodo = () => {
   const navigate = useNavigate();
   const isSuccess = useSelector((state) => state.todos.isSuccess);
 
-  // // const { isLoading, error, todos } = useSelector((state) => state);
   useEffect(() => {
     if (!isSuccess) {
       return;
@@ -29,9 +28,7 @@ const AddTodo = () => {
   });
 
   const onChangeValue = (e) => {
-    // console.log(e);
     const { name, value } = e.target;
-    console.log(name, value);
     setTodo({ ...todo, [name]: value });
   };
 
@@ -54,7 +51,7 @@ const AddTodo = () => {
     <div>
       <Header />
       <form onSubmit={onAddBtn}>
-        <div className="flex flex-col mt-3 ml-3">
+        <div className="flex flex-col mt-3 ml-3 mr-3">
           <label>작성자</label>
           <input
             className="border rounded-md h-10 "

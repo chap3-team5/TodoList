@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { __getTodoId } from '../redux/modules/commentsSlice';
 import AddComments from './AddComment';
 import Comment from './Comment';
-import addtodoSlice from '../redux/modules/addtodoSlice';
+
 //충돌부분
 
 const Comments = () => {
