@@ -1,5 +1,3 @@
-//src/redux/modules/commentsSlice.js
-//ActionCreator
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
@@ -18,7 +16,7 @@ export const __getComments = createAsyncThunk(
 );
 
 export const __getTodoId = createAsyncThunk(
-  'getComments',
+  'getTodoId',
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.get(
@@ -44,7 +42,7 @@ export const __addComment = createAsyncThunk(
 );
 
 export const __delComment = createAsyncThunk(
-  'delComment',
+  'delComment', // 댓글 삭제
   async (payload, thunkAPI) => {
     try {
       await axios.delete(`http://localhost:3001/comments/${payload}`);
@@ -77,7 +75,7 @@ const initialState = {
   },
   isLoading: false,
   error: null,
-  editingToggle: false,
+  editToggle: false,
 };
 
 //reducer
@@ -85,13 +83,11 @@ export const commentsSlice = createSlice({
   name: 'comments',
   initialState,
   reducers: {
-    editToggle: (state, action) => {
-      state.editingToggle = action.payload;
-    },
-    emptyComment: (state, _) => {
-      state.commentsTodoId.data.content = '';
+    editingToggle: (state, action) => {
+      state.editToggle = action.payload;
     },
   },
+
   extraReducers: {
     //comment 전체 조회
     [__getTodoId.pending]: (state) => {
@@ -157,5 +153,5 @@ export const commentsSlice = createSlice({
 });
 
 //export reducer
-export const { editToggle, emptyComment } = commentsSlice.actions;
+export const { editingToggle } = commentsSlice.actions;
 export default commentsSlice.reducer;

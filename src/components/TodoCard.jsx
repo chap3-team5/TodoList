@@ -23,7 +23,7 @@ const TodoCard = ({ todo }) => {
         <div>{todo.title}</div>
         <button
           onClick={(e) => {
-            e.stopPropagation(); // stopPropagation 이벤트 버블링 막아주는
+            e.stopPropagation();
             const result = window.confirm('이 할일을 지울까요?');
             if (result) {
               return DeleteHandler();

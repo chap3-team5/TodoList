@@ -1,4 +1,3 @@
-//src/redux/modules/addtodoSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
@@ -9,6 +8,7 @@ const initialState = {
   isSuccess: false,
   error: null,
 };
+
 //Thunk 함수
 export const __addBtn = createAsyncThunk(
   'addBtn',
@@ -34,8 +34,6 @@ const addtodoSlice = createSlice({
     completeTodo: (state, action) => {
       state.isSuccess = false;
     },
-
-    // dfsd
   },
 
   extraReducers: {
