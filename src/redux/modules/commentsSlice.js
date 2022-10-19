@@ -74,21 +74,10 @@ export const __modifyComment = createAsyncThunk(
 const initialState = {
   comments: {
     data: [],
-<<<<<<< HEAD
   },
   isLoading: false,
   error: null,
   editingToggle: false,
-=======
-    isLoading: false,
-    error: null,
-  },
-  commentsTodoId: {
-    data: [],
-    isLoading: false,
-    error: null,
-  },
->>>>>>> origin/dev
 };
 
 //reducer
