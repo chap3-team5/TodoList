@@ -8,7 +8,7 @@ import { __getTodosThunk } from '../redux/modules/todolistSlice';
 const TodoList = () => {
   const dispatch = useDispatch();
   const { todos, isLoading, error } = useSelector((state) => state.todos);
-  console.log(isLoading);
+  // console.log(isLoading);
 
   useEffect(() => {
     dispatch(__getTodosThunk());
