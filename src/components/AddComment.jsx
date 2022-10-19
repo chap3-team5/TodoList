@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { __addComment } from '../redux/modules/addCommentSlice';
+import { __addComment } from '../redux/modules/commentsSlice';
 
 const AddComments = () => {
   const dispatch = useDispatch();

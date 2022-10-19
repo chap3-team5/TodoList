@@ -17,6 +17,19 @@ export const __getTodoId = createAsyncThunk(
   }
 );
 
+export const __addComment = createAsyncThunk(
+  'addComment/코멘트추가하기',
+  async (payload, thunkAPI) => {
+    try {
+      const data = await axios.post(`http://localhost:3001/comments`, payload);
+
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err);
+    }
+  }
+);
+
 export const __delComment = createAsyncThunk(
   'delComment',
   async (payload, thunkAPI) => {
@@ -41,7 +54,7 @@ export const __modifyComment = createAsyncThunk(
       );
       return thunkAPI.fulfillWithValue(data);
     } catch (err) {
-      return thunkAPI.rejectWithValue(err);
+      // return thunkAPI.rejectWithValue(err);
     }
   }
 );
@@ -77,7 +90,6 @@ export const commentsSlice = createSlice({
       state.editToggle = action.payload;
     },
     emptyComment: (state, _) => {
-      console.log(state);
       //state.commentsTodoId.data.content = '';
     },
   },
@@ -103,7 +115,7 @@ export const commentsSlice = createSlice({
       const target = state.commentsTodoId.data.findIndex(
         (comment) => comment.id === action.payload
       );
-      state.commentsTodoId.data.splice(target, 1);
+      state.comments.data.splice(target, 1);
     },
     [__delComment.rejected]: (state, action) => {
       state.commentsTodoId.isLoading = false;
@@ -119,10 +131,25 @@ export const commentsSlice = createSlice({
           return comment;
         }
       });
+
+      state.comments.data = newComments;
       state.isLoading = false;
-      state.comments = newComments;
     },
     [__modifyComment.rejected]: () => {},
+
+    [__addComment.pending]: (state) => {
+      state.isLoading = true;
+    },
+
+    [__addComment.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.comments.data.push(action.payload);
+    },
+
+    [__addComment.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
 });
 //export reducer
