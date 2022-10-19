@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import Header from '../components/Header';
 import HomeBox from '../components/HomeBox';
 import { RiDraftLine } from 'react-icons/ri';
