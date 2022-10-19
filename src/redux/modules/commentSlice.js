@@ -1,6 +1,5 @@
 //src/modules/commentSlice.js
-
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const __getComment = createAsyncThunk(
@@ -10,6 +9,7 @@ export const __getComment = createAsyncThunk(
       const { data } = await axios.get(
         `http://localhost:3001/comments/${payload}`
       );
+
       thunkAPI.fulfillWithValue(data);
     } catch (e) {
       thunkAPI.rejectWithValue(e);
@@ -20,7 +20,7 @@ export const __getComment = createAsyncThunk(
 //initialState
 const initialState = {
   data: {
-    content: '',
+    comment: '',
     nickname: '',
     id: 0,
     todoId: 0,

@@ -48,7 +48,7 @@ const DetailTodo = () => {
           <div className="flex justify-between mx-auto bg-gray-200 rounded-xl shadow border p-3 ">
             <div className=" text-center font-bold "> 아이디 : {todo.id}</div>
             <div className="text-emerald-500 text-center hover:text-emerald-800 transition-all duration-300 ease-out">
-              <Link to="/TodoList">뒤로가기</Link>{' '}
+              <Link to="/TodoList">뒤로가기</Link>
             </div>
           </div>
         )}

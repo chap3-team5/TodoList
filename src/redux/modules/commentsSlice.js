@@ -3,6 +3,20 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+export const __getComments = createAsyncThunk(
+  'getComments',
+  async (payload, thunkAPI) => {
+    try {
+      const { data } = await axios.get(
+        `http://localhost:3001/comments/${payload}`
+      );
+      return thunkAPI.fulfillWithValue(data);
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.code);
+    }
+  }
+);
+
 export const __getTodoId = createAsyncThunk(
   'getComments',
   async (payload, thunkAPI) => {
@@ -60,10 +74,21 @@ export const __modifyComment = createAsyncThunk(
 const initialState = {
   comments: {
     data: [],
+<<<<<<< HEAD
   },
   isLoading: false,
   error: null,
   editingToggle: false,
+=======
+    isLoading: false,
+    error: null,
+  },
+  commentsTodoId: {
+    data: [],
+    isLoading: false,
+    error: null,
+  },
+>>>>>>> origin/dev
 };
 
 //reducer
