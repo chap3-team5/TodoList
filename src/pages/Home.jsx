@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div>
       <Header />
-      <div className="grid place-items-center pt-6 flex flex-col space-y-10">
+      <div className="grid place-items-center pt-6 flex-col space-y-10">
         <HomeBox title="Add To Do" onClick={() => navigate('/AddTodo')} />
         <HomeBox title="Todo List" onClick={() => navigate('/TodoList')} />
       </div>

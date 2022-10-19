@@ -1,6 +1,4 @@
-//logger
 import logger from 'redux-logger';
-// slices
 import { configureStore } from '@reduxjs/toolkit';
 import todos from '../modules/todolistSlice';
 import detailTodo from '../modules/detailTodoSlice';

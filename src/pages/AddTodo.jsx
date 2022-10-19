@@ -1,15 +1,21 @@
 import React from 'react';
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { completeTodo, __addBtn } from '../redux/modules/addtodoSlice';
 import Header from '../components/Header';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useInput from '../hooks/useInput';
+import CommonButton from '../components/CommonButton';
 
 const AddTodo = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isSuccess = useSelector((state) => state.todos.isSuccess);
+  const [todo, onChangeValue, reset] = useInput({
+    username: '',
+    title: '',
+    body: '',
+  });
 
   useEffect(() => {
     if (!isSuccess) {
@@ -20,17 +26,6 @@ const AddTodo = () => {
     }
     return () => dispatch(completeTodo());
   }, [dispatch, isSuccess, navigate]);
-
-  const [todo, setTodo] = useState({
-    username: '',
-    title: '',
-    body: '',
-  });
-
-  const onChangeValue = (e) => {
-    const { name, value } = e.target;
-    setTodo({ ...todo, [name]: value });
-  };
 
   const onAddBtn = (e) => {
     e.preventDefault();
@@ -43,7 +38,7 @@ const AddTodo = () => {
       console.log(alert(1));
     }
     dispatch(__addBtn(todo));
-    setTodo({ username: '', title: '', body: '' });
+    reset();
     navigate('/TodoList');
   };
 
@@ -60,7 +55,6 @@ const AddTodo = () => {
             maxLength="5"
             value={todo.username}
             onChange={onChangeValue}
-            required
           />
           <label className="mt-5">제목</label>
           <input
@@ -70,7 +64,6 @@ const AddTodo = () => {
             maxLength="50"
             value={todo.title}
             onChange={onChangeValue}
-            required
           />
           <label className="mt-5">내용</label>
           <textarea
@@ -80,11 +73,11 @@ const AddTodo = () => {
             maxLength="200"
             value={todo.body}
             onChange={onChangeValue}
-            required
           />
-          <div className="border mt-40 text-center h-7 cursor-pointer  hover:bg-slate-200 rounded-md">
-            <button>추가하기</button>
-          </div>
+
+          <CommonButton className="border mt-40 text-center h-7 cursor-pointer  hover:bg-slate-200 rounded-md w-full">
+            추가하기
+          </CommonButton>
         </div>
       </form>
     </div>
