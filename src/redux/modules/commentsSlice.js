@@ -158,5 +158,5 @@ export const commentsSlice = createSlice({
 });
 
 //export reducer
-export const {} = commentsSlice.actions;
+export const { editToggle, emptyComment } = commentsSlice.actions;
 export default commentsSlice.reducer;

@@ -1,6 +1,5 @@
 //src/components/comment.jsx
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {

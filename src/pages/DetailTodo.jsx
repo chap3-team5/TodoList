@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { __getTodo, __updateTodo } from '../redux/modules/detailTodoSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import Comments from '../components/Comments';
+import CommonButton from '../components/CommonButton';
 
 const DetailTodo = () => {
   const dispatch = useDispatch();
@@ -72,21 +73,21 @@ const DetailTodo = () => {
       </div>
       <div className="flex justify-center mt-3 bottom-0 w-full">
         {isEdit ? (
-          <button
+          <CommonButton
             onClick={onClickEditHandler}
-            className=" bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded"
+            css=" bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded"
           >
             {'저장'}
-          </button>
+          </CommonButton>
         ) : (
-          <button
+          <CommonButton
             onClick={() => {
               setIsEdit(!isEdit);
             }}
-            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+            css="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
           >
             {'수정'}
-          </button>
+          </CommonButton>
         )}
       </div>
       {!isEdit && <Comments />}
