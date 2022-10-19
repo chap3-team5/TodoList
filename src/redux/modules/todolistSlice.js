@@ -12,13 +12,11 @@ export const __getTodosThunk = createAsyncThunk(
   'GET_TODOS',
   async (_, thunkAPI) => {
     // 두가지 매개변수를 받아와야 됌, get은 _써서 빈자리 채워주기
-
     try {
       // 요청 성공/실패에 따라 실행되어야 되는 부분 try...catch 구문으로 나눠주기
       const { data } = await axios.get('http://localhost:3001/todos'); // 구조분해할당
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
-      console.log(error);
       return thunkAPI.rejectWithValue(error.code);
     }
   }
