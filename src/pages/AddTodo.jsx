@@ -50,7 +50,7 @@ const AddTodo = () => {
     <div>
       <Header />
       <form onSubmit={onAddBtn}>
-        <div className="flex flex-col mt-3 ml-3">
+        <div className="flex flex-col mt-3 ml-3 mr-3">
           <label>작성자</label>
           <input
             className="border rounded-md h-10 "

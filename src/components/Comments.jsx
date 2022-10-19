@@ -5,6 +5,8 @@ import { __getTodoId } from '../redux/modules/commentsSlice';
 import AddComments from './AddComment';
 import Comment from './Comment';
 
+//충돌부분
+
 const Comments = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -14,7 +16,7 @@ const Comments = () => {
 
   useEffect(() => {
     dispatch(__getTodoId(id));
-  }, [dispatch, id, isShow]);
+  }, [dispatch, id]);
 
   return (
     <div>

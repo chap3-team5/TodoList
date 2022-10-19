@@ -13,13 +13,10 @@ const initialState = {
 export const __addBtn = createAsyncThunk(
   'addBtn',
   async (payload, thunkAPI) => {
-    console.log(payload);
     try {
-      const data = await axios.post(`http://localhost:3001/todos`, payload);
-      console.log(data);
-      //   return thunkAPI.fulfillWithValue(data);
+      const { data } = await axios.post('http://localhost:3001/todos', payload);
+      return thunkAPI.fulfillWithValue(data);
     } catch (err) {
-      console.log(err);
       //error도 하나의 객체.
       return thunkAPI.rejectWithValue(err);
     }
@@ -44,7 +41,6 @@ const addtodoSlice = createSlice({
   extraReducers: {
     //pending - 대기
     [__addBtn.pending]: (state) => {
-      //   console.log('fulfilled상태', state, action);
       //promise가 fullfilled일때 dispatch.
       //네트워크 요청이 시작되면 로딩상태를 true로 변경.
       state.isLoading = true;
