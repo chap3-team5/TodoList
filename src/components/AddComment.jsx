@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { __addComment } from '../redux/modules/addCommentSlice';
+import { __addComment } from '../redux/modules/commentsSlice';
 
 const AddComments = () => {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const AddComments = () => {
   const onSubmitHandler = (event) => {
     event.preventDefault();
     if (comment.nickname.trim() === '' || comment.body.trim() === '') return;
-    dispatch(__addComment({ todoId: id, ...comment }));
+    dispatch(__addComment({ todoId: +id, ...comment }));
     setComment({ nickname: '', body: '' });
   };
 

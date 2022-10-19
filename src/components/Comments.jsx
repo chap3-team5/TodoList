@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { __getTodoId } from '../redux/modules/commentsSlice';
 import AddComments from './AddComment';
 import Comment from './Comment';
+import addtodoSlice from '../redux/modules/addtodoSlice';
 //충돌부분
 
 const Comments = () => {
@@ -12,7 +13,6 @@ const Comments = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.comments.comments);
-  console.log(data);
 
   //여기까지충돌부분 ------------------------------------
   const [isShow, setIsShow] = useState(false);
