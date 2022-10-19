@@ -4,15 +4,23 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { __delComment, __modifyComment } from '../redux/modules/commentsSlice';
-import { emptyComment, __getComments } from '../redux/modules/commentSlice';
+import {
+  editToggle,
+  __delComment,
+  __getTodoId,
+  __modifyComment,
+} from '../redux/modules/commentsSlice';
+import { __getComment, emptyComment } from '../redux/modules/commentSlice';
 
 const Comment = ({ comment }) => {
+  // console.log(comment);
+
   const { id } = useParams();
   const [isEdit, setIsEdit] = useState(false);
   const [modifyComment, setModifyComment] = useState('');
   const dispatch = useDispatch();
   const { editState } = useSelector((state) => state.comments);
+
   //   const { content } = useSelector((state) => state.comment);
 
   //   const [value, setValue] = useState('');
@@ -21,25 +29,27 @@ const Comment = ({ comment }) => {
   //     setValue(value);
   //   };
 
+  useEffect(() => {
+    setModifyComment(comment.body);
+  }, [comment]);
+
   //저장하기
   const onSaveBtn = () => {
     dispatch(
       __modifyComment({
-        id: comment.id,
-        content: modifyComment,
-        nickname: comment.nickname,
-        todoId: id,
+        ...comment,
+        body: modifyComment,
       })
     );
     setIsEdit(false);
-    //dispatch(editToggle(false));
+    // dispatch(editToggle(false));
   };
 
   //수정하기
   const onEditBtn = () => {
     setIsEdit(true);
-    dispatch(__getComments(comment.id));
-    //dispatch(editToggle(true));
+    dispatch(__getComment(comment.id));
+    // dispatch(editToggle(true));
   };
 
   //삭제하기
@@ -55,7 +65,10 @@ const Comment = ({ comment }) => {
   const onCancleBtn = () => {
     setIsEdit(false);
     dispatch(emptyComment());
+
     //dispatch(editToggle(false));
+
+    // dispatch(editToggle(false));
   };
 
   useEffect(() => {

@@ -2,16 +2,16 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const __getComments = createAsyncThunk(
-  'getComments', // 전체 댓글 조회
+export const __getComment = createAsyncThunk(
+  '코멘트 한 개 가져오기',
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.get(
         `http://localhost:3001/comments/${payload}`
       );
-      return thunkAPI.fulfillWithValue(data);
-    } catch (err) {
-      return thunkAPI.rejectWithValue(err.code);
+      thunkAPI.fulfillWithValue(data);
+    } catch (e) {
+      thunkAPI.rejectWithValue(e);
     }
   }
 );
@@ -35,6 +35,7 @@ const commentSlice = createSlice({
   initialState,
   reducers: {
     emptyComment: (state) => {
+      console.log(state);
       state.data.content = '';
     },
     editToggle: (state, action) => {
@@ -42,12 +43,22 @@ const commentSlice = createSlice({
     },
   },
   extraReducers: {
-    [__getComments.fulfilled]: (state, action) => {
+    [__getComment.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__getComment.fulfilled]: (state, action) => {
+      state.isLoading = false;
       state.data = action.payload;
+    },
+    [__getComment.rejected]: (state, action) => {
+      state.isLoading = true;
+      state.error = action.payload;
     },
   },
 });
 
 //export
-export const { editToggle, emptyComment } = commentSlice.actions;
+
+export const { emptyComment } = commentSlice.actions;
+
 export default commentSlice.reducer;

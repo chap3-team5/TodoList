@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Header from '../components/Header';
 import CommonButton from '../components/CommonButton';
 import { Link, useParams } from 'react-router-dom';
@@ -11,7 +11,7 @@ const DetailTodo = () => {
   const { id } = useParams();
   const [isEdit, setIsEdit] = useState(false);
   const [todoContent, setTodoContent] = useState('');
-
+  const inputRef = useRef();
   //투두 한 개 갖고오기
   const todo = useSelector((state) => state.detailTodo.todo);
   useEffect(() => {
@@ -22,6 +22,14 @@ const DetailTodo = () => {
   useEffect(() => {
     setTodoContent(todo.body);
   }, [todo]);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      const end = inputRef.current.value.length;
+      inputRef.current.setSelectionRange(end, end);
+      inputRef.current.focus();
+    }
+  }, [isEdit]);
 
   //투두 저장 눌렀을 때 변경된 내용 저장하기
   const onClickEditHandler = () => {
@@ -49,6 +57,7 @@ const DetailTodo = () => {
         </div>
         {isEdit ? (
           <textarea
+            ref={inputRef}
             value={todoContent}
             name="todoContent"
             onChange={(e) => setTodoContent(e.target.value)}
