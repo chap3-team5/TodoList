@@ -12,7 +12,6 @@ const Comments = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.comments.comments);
-  console.log(data);
 
   //여기까지충돌부분 ------------------------------------
   const [isShow, setIsShow] = useState(false);

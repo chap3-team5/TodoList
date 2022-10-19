@@ -4,7 +4,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const __getTodoId = createAsyncThunk(
-  'getComment',
+  'getComment', // 댓글 조회 todoId
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.get(
@@ -18,11 +18,11 @@ export const __getTodoId = createAsyncThunk(
 );
 
 export const __delComment = createAsyncThunk(
-  'delComment',
+  'delComment', // 댓글 삭제
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.delete(
-        `http://localhost:3001/comments?todoId=${payload}`
+        `http://localhost:3001/comments/${payload}`
       );
       return thunkAPI.fulfillWithValue(data);
     } catch (err) {
@@ -72,14 +72,7 @@ const initialState = {
 export const commentsSlice = createSlice({
   name: 'comments',
   initialState,
-  reducer: {
-    editToggle: (state, action) => {
-      state.editToggle = action.payload;
-    },
-    emptyComment: (state) => {
-      state.data.content = '';
-    },
-  },
+  reducer: {},
   extraReducers: {
     //댓글 전부 가져와서 조회할거야.
     [__getTodoId.pending]: (state) => {
@@ -120,5 +113,5 @@ export const commentsSlice = createSlice({
   },
 });
 //export reducer
-export const { editToggle, emptyComment } = commentsSlice.actions;
+export const {} = commentsSlice.actions;
 export default commentsSlice.reducer;

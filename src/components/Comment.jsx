@@ -1,19 +1,13 @@
 //src/components/comment.jsx
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import {
-  emptyComment,
-  editToggle,
-  __delComment,
-  __getTodoId,
-  __modifyComment,
-} from '../redux/modules/commentsSlice';
+import { __delComment, __modifyComment } from '../redux/modules/commentsSlice';
+import { emptyComment, __getComments } from '../redux/modules/commentSlice';
 
 const Comment = ({ comment }) => {
-  //   console.log(comment);
   const { id } = useParams();
   const [isEdit, setIsEdit] = useState(false);
   const [modifyComment, setModifyComment] = useState('');
@@ -26,25 +20,26 @@ const Comment = ({ comment }) => {
   //     const { value } = e.target;
   //     setValue(value);
   //   };
+
   //저장하기
   const onSaveBtn = () => {
     dispatch(
       __modifyComment({
         id: comment.id,
         content: modifyComment,
-        ninckname: comment.ninckname,
+        nickname: comment.nickname,
         todoId: id,
       })
     );
     setIsEdit(false);
-    dispatch(editToggle(false));
+    //dispatch(editToggle(false));
   };
 
   //수정하기
   const onEditBtn = () => {
     setIsEdit(true);
-    dispatch(__getTodoId(comment.id));
-    dispatch(editToggle(true));
+    dispatch(__getComments(comment.id));
+    //dispatch(editToggle(true));
   };
 
   //삭제하기
@@ -52,8 +47,6 @@ const Comment = ({ comment }) => {
     const delBtn = window.confirm('삭제하시겠어요?');
     if (delBtn) {
       dispatch(__delComment(comment.id));
-      //클릭시 console 값 들어와.
-      //   console.log(comment.id);
     } else {
       return;
     }
@@ -62,15 +55,20 @@ const Comment = ({ comment }) => {
   const onCancleBtn = () => {
     setIsEdit(false);
     dispatch(emptyComment());
-    dispatch(editToggle(false));
+    //dispatch(editToggle(false));
   };
+
+  useEffect(() => {
+    setModifyComment(comment.body);
+  }, [comment.body]);
+
   return (
     <div className="commentwrap">
       {/* 수정버튼 클릭 전 */}
       {!isEdit ? (
         <div className="borderWrap">
           <div className="inputcomment">
-            <div>{comment.ninckname}</div>
+            <div>{comment.nickname}</div>
             <div>{comment.body}</div>
           </div>
 
@@ -89,7 +87,7 @@ const Comment = ({ comment }) => {
           <div className="inputcomment">
             <input
               type="text"
-              name="comment"
+              name="modifyComment"
               value={modifyComment}
               onChange={(e) => {
                 setModifyComment(e.target.value);
