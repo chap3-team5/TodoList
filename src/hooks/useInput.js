@@ -10,3 +10,7 @@ const useInput = () => {
 };
 
 export default useInput;
+
+// import useInput from ~~
+// const [title, ~~~hanlder] = useInput();
+// onchange = {~~handler}
