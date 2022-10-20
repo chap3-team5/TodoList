@@ -14,7 +14,7 @@ const store = configureStore({
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 
-  devTools: process.env.REACT_APP_MOD !== 'production',
+  devTools: process.env.NODE_ENV !== 'production',
 });
 
 export default store;
