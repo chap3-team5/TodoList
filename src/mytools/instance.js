@@ -1,5 +1,6 @@
+import axios from 'axios';
 const instance = axios.create({
-  baseURL: process.envproduction.REACT_APP_URL,
+  baseURL: process.env.REACT_APP_URL,
 });
 
 export const TodoApi = {
@@ -11,7 +12,7 @@ export const TodoApi = {
   patchComments: (payload) => instance.patch(`/comments/${payload.id}`),
 
   getTodos: () => instance.get('/todos'),
-  getTodos: (payload) => instance.get(`/todos?id=${payload}`),
+  getTodo: (payload) => instance.get(`/todos?id=${payload}`),
   postTodos: (payload) => instance.post('/todos', payload),
   deleteTodos: (payload) => instance.delete(`/todos/${payload}`),
   patchTodos: (payload) => instance.patch(`/todos/${payload.id}`),

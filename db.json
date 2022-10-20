@@ -1,3 +1,18 @@
 {
-  "todos": []
+  "todos": [
+    {
+      "username": "sdf",
+      "title": "sdf",
+      "body": "sdfsdf",
+      "id": 1
+    }
+  ],
+  "comments": [
+    {
+      "todoId": 1,
+      "nickname": "sdf",
+      "body": "sdf",
+      "id": 1
+    }
+  ]
 }
