@@ -17,7 +17,7 @@ const Comments = () => {
   }, [dispatch, id]);
 
   return (
-    <div>
+    <div className="w-[100%] overflow-hidden">
       <div
         onClick={() => {
           setIsShow((show) => !show);
@@ -27,7 +27,13 @@ const Comments = () => {
       </div>
       <AddComments />
 
-      <div className={`${isShow ? 'hidden' : 'block'}`}>
+      <div
+        className={
+          isShow
+            ? 'transform -translate-y-30 transition duration-300 '
+            : 'transform translate-y-full transition duration-300  '
+        }
+      >
         {data.map((comment) => (
           <Comment key={comment.id} comment={comment} />
         ))}
