@@ -35,6 +35,7 @@ const AddTodo = () => {
       todo.body.trim() === ''
     ) {
       return alert('모든 항목을 입력해주세유');
+      // console.log(alert(1));
     }
     dispatch(__addBtn(todo));
     reset();
