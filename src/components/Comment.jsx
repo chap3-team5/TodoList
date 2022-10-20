@@ -64,7 +64,7 @@ const Comment = ({ comment }) => {
             </div>
             <div className=" w-vh p-1 text-xl">{comment.body}</div>
           </div>
-          <div className="flex gap-2 mr-5 mt-2 p-1 py-1 justify-center min-w-[120px] rounded-md bg-white text-base font-large text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+          <div className="flex gap-2 mr-5 m-2 p-1 py-1 justify-center min-w-[120px] rounded-md bg-white text-base font-large text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
             <CommonButton
               onClick={onEditBtn}
               disabled={dataToggle}
@@ -82,8 +82,8 @@ const Comment = ({ comment }) => {
           </div>
         </div>
       ) : (
-        <div className="flex text-center rounded">
-          <div className="w-24 p-1 ml-2 mr-2 rounded-md border border-gray-300 text-xl">
+        <div className="w-full flex flex-row m-2 rounded-md text-sm bg-gray-50 font-medium text-gray-500 ">
+          <div className="w-full h-16 pt-5 text-center rounded">
             <input
               className="w-[80%] min-w-[10%] float-left ml-2 mr-2 rounded-md border border-gray-300 text-xl"
               type="text"
@@ -95,7 +95,7 @@ const Comment = ({ comment }) => {
             />
           </div>
 
-          <div className="flex gap-2 mr-5 mt-2 p-1 py-1 justify-center min-w-[120px] rounded-md bg-white text-base font-large text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+          <div className="flex gap-2 mr-5 m-2 p-1 py-1 justify-center min-w-[120px] rounded-md bg-white text-base font-large text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ">
             <CommonButton
               onClick={onCancleBtn}
               className="w-full justify-center rounded-md border border-gray-300 bg-white px-2 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-0 sm:w-auto sm:text-sm"
