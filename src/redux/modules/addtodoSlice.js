@@ -48,7 +48,7 @@ const addtodoSlice = createSlice({
       //네트워크 요청이 끝났으니, false로 변경.
       state.isLoading = false;
       //Store에 있는 addtodo서버에서 가져온 todo를 넣어.
-      state.todos = action.payload;
+      state.todos.push(action.payload);
     },
 
     [__addBtn.rejected]: (state, action) => {
