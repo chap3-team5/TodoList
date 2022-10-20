@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { TodoApi } from '../../mytools/instance';
 
 const initialState = {
   todos: [],
@@ -14,7 +14,7 @@ export const __getTodosThunk = createAsyncThunk(
     // 두가지 매개변수를 받아와야 됌, get은 _써서 빈자리 채워주기
     try {
       // 요청 성공/실패에 따라 실행되어야 되는 부분 try...catch 구문으로 나눠주기
-      const { data } = await axios.get('http://localhost:3001/todos'); // 구조분해할당
+      const { data } = await TodoApi.getTodos; // 구조분해할당
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);
@@ -26,7 +26,7 @@ export const __deleteTodosThunk = createAsyncThunk(
   'DELETE_TODO',
   async (arg, thunkAPI) => {
     try {
-      axios.delete(`http://localhost:3001/todos/${arg}`);
+      TodoApi.deleteTodos(payload);
       return thunkAPI.fulfillWithValue(arg);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { TodoApi } from '../../mytools/instance';
 
 const initialState = {
   isLoading: false,
@@ -12,7 +12,7 @@ export const __getTodo = createAsyncThunk(
   'getTodo/투두한개가져오기',
   async (payload, thunkAPI) => {
     try {
-      const todo = await axios.get(`http://localhost:3001/todos?id=${payload}`);
+      const todo = await TodoApi.getTodo(payload);
       return thunkAPI.fulfillWithValue(...todo.data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
@@ -25,10 +25,7 @@ export const __updateTodo = createAsyncThunk(
   'updateTodo/투두 수정하기',
   async (payload, thunkAPI) => {
     try {
-      const todo = await axios.patch(
-        `http://localhost:3001/todos/${payload.id}`,
-        payload
-      );
+      const todo = await TodoApi.patchTodos(payload);
       return thunkAPI.fulfillWithValue(todo.data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e);

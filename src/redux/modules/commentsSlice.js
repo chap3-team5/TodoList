@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { TodoApi } from '../../mytools/instance';
 
 export const __getComments = createAsyncThunk(
   'getComments',
   async (payload, thunkAPI) => {
     try {
-      const { data } = await axios.get(`process.env.COMMENT${payload}`);
+      const { data } = await TodoApi.getCommentsId(payload);
       return thunkAPI.fulfillWithValue(data);
     } catch (err) {
       return thunkAPI.rejectWithValue(err.code);
@@ -17,9 +17,7 @@ export const __getTodoId = createAsyncThunk(
   'getTodoId',
   async (payload, thunkAPI) => {
     try {
-      const { data } = await axios.get(
-        `http://localhost:3001/comments/?todoId=${payload}`
-      );
+      const { data } = await TodoApi.getCommentsTodoId(payload);
       return thunkAPI.fulfillWithValue(data);
     } catch (err) {
       return thunkAPI.rejectWithValue(err.code);
@@ -31,7 +29,7 @@ export const __addComment = createAsyncThunk(
   'addComment',
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.post(`http://localhost:3001/comments`, payload);
+      const data = await TodoApi.postComments(payload);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (err) {
       return thunkAPI.rejectWithValue(err);
@@ -43,7 +41,7 @@ export const __delComment = createAsyncThunk(
   'delComment', // 댓글 삭제
   async (payload, thunkAPI) => {
     try {
-      await axios.delete(`http://localhost:3001/comments/${payload}`);
+      await TodoApi.deleteComments(payload);
       return thunkAPI.fulfillWithValue(payload);
     } catch (err) {
       return thunkAPI.rejectWithValue(err.code);
@@ -55,10 +53,7 @@ export const __modifyComment = createAsyncThunk(
   'modifyComment',
   async (payload, thunkAPI) => {
     try {
-      const { data } = await axios.patch(
-        `http://localhost:3001/comments/${payload.id}`,
-        payload
-      );
+      const { data } = await TodoApi.patchComments(payload);
       return thunkAPI.fulfillWithValue(data);
     } catch (err) {
       return thunkAPI.rejectWithValue(err);

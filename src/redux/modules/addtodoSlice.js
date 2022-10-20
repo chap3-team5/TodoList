@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { TodoApi } from '../../mytools/instance';
 
 //initialState
 const initialState = {
@@ -14,7 +14,7 @@ export const __addBtn = createAsyncThunk(
   'addBtn',
   async (payload, thunkAPI) => {
     try {
-      const { data } = await axios.post('http://localhost:3001/todos', payload);
+      const { data } = await TodoApi.postTodos(payload);
       return thunkAPI.fulfillWithValue(data);
     } catch (err) {
       //error도 하나의 객체.
