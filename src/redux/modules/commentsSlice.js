@@ -5,9 +5,7 @@ export const __getComments = createAsyncThunk(
   'getComments',
   async (payload, thunkAPI) => {
     try {
-      const { data } = await axios.get(
-        `http://localhost:3001/comments/${payload}`
-      );
+      const { data } = await axios.get(`process.env.COMMENT${payload}`);
       return thunkAPI.fulfillWithValue(data);
     } catch (err) {
       return thunkAPI.rejectWithValue(err.code);
