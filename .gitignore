@@ -26,4 +26,5 @@ yarn-error.log*
 db.json
 
 # API KEY
-.env
+.env.development
+.env.production

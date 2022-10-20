@@ -24,7 +24,7 @@
   },
   "scripts": {
     "start": "node server",
-    "start:dev": "cross-env NODE_PATH=src react-scripts start",
+    "start:dev": "env-cmd -f .env.development cross-env NODE_PATH=src react-scripts start",
     "build": "cross-env NODE_PATH=src react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
